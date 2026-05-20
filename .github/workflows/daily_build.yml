@@ -1,0 +1,46 @@
+name: Daily AI Radar Update
+
+on:
+  schedule:
+    # 設定每天執行時間 (使用 UTC 時間)
+    # 這裡設定 UTC 10:00 (台灣時間下午 18:00，美東時間早上 06:00)
+    # 確保台股已收盤且資料結算完畢，週一到週五執行 (1-5)
+    - cron: '0 10 * * 1-5'
+  
+  # Rule 12 防禦性設計：允許您在 GitHub 介面上「手動點擊」執行，方便立即測試
+  workflow_dispatch:
+
+jobs:
+  update-radar-data:
+    runs-on: ubuntu-latest
+    
+    # 【關鍵】必須給予 GitHub Actions 寫入權限，否則無法 push 更新後的 HTML
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        # 依據 Rule 2，不建立多餘的 requirements.txt，直接安裝需要的 2 個核心套件
+        run: |
+          python -m pip install --upgrade pip
+          pip install yfinance beautifulsoup4
+
+      - name: Run Quant Data Injector
+        # 執行我們在 Checkpoint 1 寫好的 Python 腳本
+        run: python update_radar.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          # 防呆機制：若當天抓取的資料與昨天完全一樣（例如假日），就不 commit 以免報錯
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 auto: 更新 AI 產業總表量化數據" && git push)
