@@ -1,2 +1,0 @@
-# AI_Chain_Update_Radar
-AI_Chain_Update_Radar_HTML
