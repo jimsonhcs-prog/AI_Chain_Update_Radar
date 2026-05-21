@@ -44,3 +44,21 @@ jobs:
           git add index.html
           # 防呆機制：若當天抓取的資料與昨天完全一樣（例如假日），就不 commit 以免報錯
           git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 auto: 更新 AI 產業總表量化數據" && git push)
+
+          - name: Send Telegram Notification
+        if: success()  # 防呆機制：只有前面抓資料和存檔都成功，才會發送通知
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          # 動態抓取您的 GitHub 帳號與專案名稱來組合 GitHub Pages 網址
+          PAGES_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          
+          # 設定要發送的 TG 訊息內容 (%0A 是換行符號)
+          MESSAGE="🤖 *Oppa Quant Bot 盤後戰報*%0A今日 AI 產業大小聯盟數據已更新完畢！%0A🔗 點此觀看：$PAGES_URL"
+          
+          # 呼叫 Telegram API 發送訊息
+          curl -s -X POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" \
+            -d chat_id="$TG_CHAT_ID" \
+            -d parse_mode="Markdown" \
+            -d text="$MESSAGE"
