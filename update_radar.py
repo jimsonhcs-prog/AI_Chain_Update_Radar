@@ -33,7 +33,7 @@ def get_quant_data(ticker_symbol):
         yield_pct = info.get('trailingAnnualDividendYield', 0)
         yield_pct = yield_pct * 100 if yield_pct else 0
             
-        return round(pct_change, 2), round(yield_pct, 2)
+        return round(pct_change, 2), round(yield_pct, 2), round(curr_price, 2)
         
     except Exception as e:
         return None, None
@@ -59,7 +59,7 @@ def generate_span_tag(pct_change, yield_pct):
     # 加入 signal_label 的 HTML 注入
     return (
         f"<span class='quant-data' style='font-size: 11px; color: {color}; margin-left: 4px; font-weight: bold;'>"
-        f"[{sign} {abs(pct_change)}% | 殖 {yield_pct}%] {signal_label}"
+        f"[{price} | {sign} {abs(pct_change)}% | 殖 {yield_pct}%]"
         f"</span>"
     )
 	
@@ -83,14 +83,14 @@ def main():
         href = a_tag.get('href', '')
         
         print(f"處理中 ({idx}/{len(a_tags)})...", end=" ")
-        pct, yld = None, None
+        pct, yld, price = None, None, None
         
         # Rule 3 & 12: 依賴 URL 動態解析並加入 Fallback 容錯機制
         if 'statementdog.com/analysis/' in href:
             code = href.split('/')[-1]
             
             # 1. 先嘗試上市 (.TW)
-            pct, yld = get_quant_data(f"{code}.TW")
+            pct, yld, price = get_quant_data(f"{code}.TW")
             
             # 2. 如果失敗，自動嘗試上櫃 (.TWO)
             if pct is None:
@@ -110,7 +110,7 @@ def main():
                 down_count += 1
             # ------------------------
 
-            new_span_soup = BeautifulSoup(generate_span_tag(pct, yld), 'html.parser').span
+            new_span_soup = BeautifulSoup(generate_span_tag(pct, yld, price), 'html.parser').span
             next_sibling = a_tag.find_next_sibling()
             
             if next_sibling and next_sibling.name == 'span' and 'quant-data' in next_sibling.get('class', []):
