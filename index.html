@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="zh-TW">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>2026 全球 AI 產業生態系十二大族群與大小聯盟完全體數據總表</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <style>
 
 /* ============================================================
@@ -516,61 +517,41 @@ tr.hidden-row { display: none; }
 </style>
 </head>
 <body>
-
 <!-- ============================================================
      頂部面板
      ============================================================ -->
 <div class="dashboard-panel">
-  <div class="dashboard-title">AI Chain 全域動能與估值篩選中樞</div>
+<div class="dashboard-title">AI Chain 全域動能與估值篩選中樞</div>
+<!-- Hero 統計儀表板 -->
 
-  <!-- Hero 統計儀表板 -->
-  <div class="hero-stats">
-    <div class="hero-stat-item hero-stat-total">
-      <span>📡 監測雷達</span>
-      <span class="stat-num">235</span>
-      <span>檔</span>
-    </div>
-    <div class="hero-stat-item hero-stat-up">
-      <span>🔥 上漲</span>
-      <span class="stat-num">221</span>
-      <span>家 &nbsp;|&nbsp; 強勢 &gt;5%</span>
-      <span class="stat-num">90</span>
-      <span>家</span>
-    </div>
-    <div class="hero-stat-item hero-stat-down">
-      <span>🧊 下跌</span>
-      <span class="stat-num">10</span>
-      <span>家</span>
-    </div>
-    <div class="hero-stat-item hero-stat-time">
-      <span>⏱ 更新</span>
-      <span class="stat-num">2026-05-21 04:03</span>
-    </div>
-  </div>
-
-  <!-- 快捷連結 -->
-  <div class="dashboard-links">
-    <a class="tag-link tag-link-alert" href="https://statementdog.com/market-trend" target="_blank">📊 大盤趨勢與多空位階 ↗</a>
-    <a class="tag-link tag-link-default" href="https://statementdog.com/screeners/revenues_ranking" target="_blank">📈 全市場營收排行 ↗</a>
-    <a class="tag-link tag-link-default" href="https://statementdog.com/tags/1168" target="_blank">⚡ 台積大聯盟概念 ↗</a>
-    <a class="tag-link tag-link-default" href="https://statementdog.com/screeners/gross_margin_ranking" target="_blank">💎 毛利率排行 ↗</a>
-    <a class="tag-link tag-link-default" href="https://statementdog.com/screeners/pe_ranking" target="_blank">💵 本益比排行 ↗</a>
-    <a class="tag-link tag-link-purple" href="https://statementdog.com/screeners/dividend_yield_ranking" target="_blank">💰 殖利率排行 ↗</a>
-  </div>
+<div class="hero-stats" style="display: flex; gap: 16px; margin-top: 16px; margin-bottom: 16px; font-size: 14px; font-weight: 600; flex-wrap: wrap;">
+<span style="background: #334155; padding: 6px 12px; border-radius: 6px; color: #f8fafc; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">📡 監測雷達: 83 檔</span>
+<span style="background: #fee2e2; padding: 6px 12px; border-radius: 6px; color: #991b1b; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">🔥 今日上漲: 77 家 (強勢 &gt;5%: 35 家)</span>
+<span style="background: #dcfce7; padding: 6px 12px; border-radius: 6px; color: #166534; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">🧊 今日下跌: 6 家</span>
+<span style="background: #f1f5f9; padding: 6px 12px; border-radius: 6px; color: #475569; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">⏱ 更新時間: 2026-05-21 05:41</span>
 </div>
 
+<!-- 快捷連結 -->
+<div class="dashboard-links">
+<a class="tag-link tag-link-alert" href="https://statementdog.com/market-trend" target="_blank">📊 大盤趨勢與多空位階 ↗</a>
+<a class="tag-link tag-link-default" href="https://statementdog.com/screeners/revenues_ranking" target="_blank">📈 全市場營收排行 ↗</a>
+<a class="tag-link tag-link-default" href="https://statementdog.com/tags/1168" target="_blank">⚡ 台積大聯盟概念 ↗</a>
+<a class="tag-link tag-link-default" href="https://statementdog.com/screeners/gross_margin_ranking" target="_blank">💎 毛利率排行 ↗</a>
+<a class="tag-link tag-link-default" href="https://statementdog.com/screeners/pe_ranking" target="_blank">💵 本益比排行 ↗</a>
+<a class="tag-link tag-link-purple" href="https://statementdog.com/screeners/dividend_yield_ranking" target="_blank">💰 殖利率排行 ↗</a>
+</div>
+</div>
 <!-- ============================================================
      搜尋與篩選工具列（新功能）
      ============================================================ -->
 <div class="filter-bar" style="margin-bottom: 12px; padding: 0 2px;">
-  <input class="filter-search" id="searchInput" type="text" placeholder="搜尋族群或個股代碼…" autocomplete="off"/>
-  <span class="filter-label">快篩：</span>
-  <button class="filter-btn active" id="btn-all" onclick="filterHot('all')">全部</button>
-  <button class="filter-btn" id="btn-hot" onclick="filterHot('hot')">🔥 強勢 ≥5%</button>
-  <button class="filter-btn" id="btn-risk" onclick="filterHot('risk')">⚠️ 風險 ≤−3%</button>
-  <button class="filter-btn" id="btn-major" onclick="filterHot('major')">🔴 大聯盟</button>
+<input autocomplete="off" class="filter-search" id="searchInput" placeholder="搜尋族群或個股代碼…" type="text"/>
+<span class="filter-label">快篩：</span>
+<button class="filter-btn active" id="btn-all" onclick="filterHot('all')">全部</button>
+<button class="filter-btn" id="btn-hot" onclick="filterHot('hot')">🔥 強勢 ≥5%</button>
+<button class="filter-btn" id="btn-risk" onclick="filterHot('risk')">⚠️ 風險 ≤−3%</button>
+<button class="filter-btn" id="btn-major" onclick="filterHot('major')">🔴 大聯盟</button>
 </div>
-
 <!-- ============================================================
      主表格
      ============================================================ -->
@@ -578,220 +559,214 @@ tr.hidden-row { display: none; }
 <table id="mainTable">
 <thead>
 <tr>
-  <th style="width:50px;">#</th>
-  <th style="width:12%;">核心族群</th>
-  <th style="width:52%;">大小聯盟完全體（點擊看財報分析）</th>
-  <th style="width:30%;">2026 戰略定位</th>
+<th style="width:50px;">#</th>
+<th style="width:12%;">核心族群</th>
+<th style="width:52%;">大小聯盟完全體（點擊看財報分析）</th>
+<th style="width:30%;">2026 戰略定位</th>
 </tr>
 </thead>
 <tbody>
-
 <!-- ======== 第一群 ======== -->
 <tr>
 <td>一</td>
 <td><div class="group-name">電力與<br/>重電基礎設施</div></td>
 <td>
-  <div class="sub-section-title">輸配重電、變壓器與外銷</div>
-  <div class="league-block">
-    <span class="league-title major-l">大聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/1519" target="_blank">華城 (1519)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.9% | 殖 1.43%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1503" target="_blank">士電 (1503)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.87% | 殖 2.76%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1513" target="_blank">中興電 (1513)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.7% | 殖 4.04%]</span>
-      <a class="ticker global-ticker" href="https://finance.yahoo.com/quote/GE" target="_blank">GE Vernova (GE)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 5.22% | 殖 0.54%] 🔥 HOT</span>
-    </div>
-  </div>
-  <div class="league-block">
-    <span class="league-title minor-l">小聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/1514" target="_blank">亞力 (1514)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 4.87% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1504" target="_blank">東元 (1504)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.04% | 殖 2.9%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2371" target="_blank">大同 (2371)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.6% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/4588" target="_blank">玖鼎電力 (4588)</a><span class="quant-data" style="font-size: 11px; color: #7f8c8d; margin-left: 4px; font-weight: bold;">[- 0.0% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1529" target="_blank">樂事綠能 (1529)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.72% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1618" target="_blank">合機 (1618)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 2.09% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1609" target="_blank">大亞 (1609)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.7% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1608" target="_blank">華榮 (1608)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.97% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1605" target="_blank">華新 (1605)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 8.46% | 殖 1.51%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1612" target="_blank">宏泰 (1612)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 2.52% | 殖 6.99%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/1516" target="_blank">川飛 (1516)</a><span class="quant-data" style="font-size: 11px; color: #7f8c8d; margin-left: 4px; font-weight: bold;">[- 0.0% | 殖 0%]</span>
-    </div>
-  </div>
-  <div class="sub-section-title">機櫃電源、BBU 與綠能物聯</div>
-  <div class="league-block">
-    <span class="league-title major-l">大聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/2308" target="_blank">台達電 (2308)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.01% | 殖 0.61%] 🔥 HOT</span>
-      <a class="ticker global-ticker" href="https://finance.yahoo.com/quote/CEG" target="_blank">Constellation (CEG)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 7.9% | 殖 0.61%] 🔥 HOT</span>
-      <a class="ticker global-ticker" href="https://finance.yahoo.com/quote/VST" target="_blank">Vistar (VST)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.9% | 殖 0.67%] 🔥 HOT</span>
-    </div>
-  </div>
-  <div class="league-block">
-    <span class="league-title minor-l">小聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/2327" target="_blank">國巨 (2327)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 10.0% | 殖 1.15%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2301" target="_blank">光寶科 (2301)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.23% | 殖 2.45%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3023" target="_blank">信邦 (3023)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.65% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2457" target="_blank">飛宏 (2457)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 2.47% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3015" target="_blank">全漢 (3015)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 0.39% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/4931" target="_blank">新盛力 (4931)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.43% | 殖 1.32%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/5309" target="_blank">系統電 (5309)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 0.74% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3211" target="_blank">順達 (3211)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 2.31% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6121" target="_blank">新普 (6121)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.33% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2415" target="_blank">錩新 (2415)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.59% | 殖 1.81%]</span>
-    </div>
-  </div>
+<div class="sub-section-title">輸配重電、變壓器與外銷</div>
+<div class="league-block">
+<span class="league-title major-l">大聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/1519" target="_blank">華城 (1519)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$803.0 | ▲ 4.29% | 殖 1.43%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/1503" target="_blank">士電 (1503)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$188.5 | ▲ 4.14% | 殖 2.76%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/1513" target="_blank">中興電 (1513)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$153.5 | ▲ 3.37% | 殖 4.04%]</span>
+<a class="ticker global-ticker" href="https://finance.yahoo.com/quote/GE" target="_blank">GE Vernova (GE)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$300.17 | ▲ 5.22% | 殖 0.54%] 🔥 HOT</span>
+</div>
+</div>
+<div class="league-block">
+<span class="league-title minor-l">小聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/1514" target="_blank">亞力 (1514)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$118.5 | ▲ 4.87% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/1504" target="_blank">東元 (1504)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$71.0 | ▲ 2.9% | 殖 2.9%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/2371" target="_blank">大同 (2371)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$28.5 | ▲ 1.6% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/4588" target="_blank">玖鼎電力 (4588)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$55.7 | ▲ 0.36% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/1529" target="_blank">樂事綠能 (1529)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$20.7 | ▲ 1.72% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/1618" target="_blank">合機 (1618)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$39.05 | ▲ 1.96% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/1609" target="_blank">大亞 (1609)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$35.0 | ▲ 3.55% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/1608" target="_blank">華榮 (1608)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$32.8 | ▲ 4.13% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/1605" target="_blank">華新 (1605)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$35.75 | ▲ 8.01% | 殖 1.51%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/1612" target="_blank">宏泰 (1612)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$36.65 | ▲ 2.52% | 殖 6.99%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/1516" target="_blank">川飛 (1516)</a><span class="quant-data" style="font-size: 11px; color: #2ecc71; margin-left: 4px; font-weight: bold;">[$20.95 | ▼ 1.64% | 殖 0%]</span>
+</div>
+</div>
+<div class="sub-section-title">機櫃電源、BBU 與綠能物聯</div>
+<div class="league-block">
+<span class="league-title major-l">大聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/2308" target="_blank">台達電 (2308)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$2050.0 | ▲ 7.05% | 殖 0.61%] 🔥 HOT</span>
+<a class="ticker global-ticker" href="https://finance.yahoo.com/quote/CEG" target="_blank">Constellation (CEG)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$281.26 | ▲ 7.9% | 殖 0.61%] 🔥 HOT</span>
+<a class="ticker global-ticker" href="https://finance.yahoo.com/quote/VST" target="_blank">Vistar (VST)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$144.0 | ▲ 6.9% | 殖 0.67%] 🔥 HOT</span>
+</div>
+</div>
+<div class="league-block">
+<span class="league-title minor-l">小聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/2327" target="_blank">國巨 (2327)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$572.0 | ▲ 10.0% | 殖 1.15%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/2301" target="_blank">光寶科 (2301)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$205.5 | ▲ 0.74% | 殖 2.45%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3023" target="_blank">信邦 (3023)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$312.0 | ▲ 2.8% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/2457" target="_blank">飛宏 (2457)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$25.05 | ▲ 3.09% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3015" target="_blank">全漢 (3015)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$51.1 | ▲ 0.79% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/4931" target="_blank">新盛力 (4931)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$194.5 | ▲ 2.64% | 殖 1.32%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/5309" target="_blank">系統電 (5309)</a><span class="quant-data" style="font-size: 11px; color: #2ecc71; margin-left: 4px; font-weight: bold;">[$67.6 | ▼ 0.15% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3211" target="_blank">順達 (3211)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$353.0 | ▲ 1.73% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/6121" target="_blank">新普 (6121)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$379.5 | ▲ 0.93% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/2415" target="_blank">錩新 (2415)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$27.35 | ▲ 3.4% | 殖 1.81%]</span>
+</div>
+</div>
 </td>
 <td class="strategy-col"><strong>算力的能源輸入端</strong>全面解決 AI 超大型資料中心面臨的龐大電力缺口，提供維持算力不間斷的物理能源。</td>
 </tr>
-
 <!-- ======== 第二群（結構示範，其餘族群同樣結構複製貼上） ======== -->
 <tr>
 <td>二</td>
 <td><div class="group-name">半導體前段與<br/>高階設備</div></td>
 <td>
-  <div class="sub-section-title">前端微縮與高階微影蝕刻</div>
-  <div class="league-block">
-    <span class="league-title major-l">大聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker global-ticker" href="https://finance.yahoo.com/quote/ASML" target="_blank">ASML (ASML)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.21% | 殖 0.4%] 🔥 HOT</span>
-      <a class="ticker global-ticker" href="https://finance.yahoo.com/quote/AMAT" target="_blank">應用材料 (AMAT)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 4.9% | 殖 0.47%]</span>
-    </div>
-  </div>
-  <div class="league-block">
-    <span class="league-title minor-l">小聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker global-ticker" href="https://finance.yahoo.com/quote/LRCX" target="_blank">科林研發 (LRCX)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.84% | 殖 0.37%] 🔥 HOT</span>
-      <a class="ticker global-ticker" href="https://finance.yahoo.com/quote/8035.T" target="_blank">東京威力 (8035.T)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 4.97% | 殖 1.36%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3413" target="_blank">京鼎 (3413)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.98% | 殖 3.5%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3680" target="_blank">家登 (3680)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 7.11% | 殖 1.36%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6667" target="_blank">信紘科 (6667)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.39% | 殖 4.75%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3551" target="_blank">世禾 (3551)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 2.33% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3176" target="_blank">商之器 (3176)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 8.32% | 殖 0%] 🔥 HOT</span>
-    </div>
-  </div>
-  <div class="sub-section-title">先進封裝濕製程與廠務設備</div>
-  <div class="league-block">
-    <span class="league-title major-l">大聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/3131" target="_blank">弘塑 (3131)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.88% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3583" target="_blank">辛耘 (3583)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 5.33% | 殖 0.73%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6187" target="_blank">萬潤 (6187)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.84% | 殖 1.09%]</span>
-    </div>
-  </div>
-  <div class="league-block">
-    <span class="league-title minor-l">小聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/5443" target="_blank">均豪 (5443)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 2.15% | 殖 1.89%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2467" target="_blank">志聖 (2467)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.68% | 殖 0.99%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2486" target="_blank">一詮 (2486)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 7.36% | 殖 0.19%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6640" target="_blank">均華 (6640)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 10.0% | 殖 1.2%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3455" target="_blank">由田 (3455)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 8.27% | 殖 1.23%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2727" target="_blank">鈦昇 (2727)</a><span class="quant-data" style="font-size: 11px; color: #2ecc71; margin-left: 4px; font-weight: bold;">[▼ 0.43% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3055" target="_blank">蔚華科 (3055)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.34% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6196" target="_blank">帆宣 (6196)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 4.95% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2404" target="_blank">漢唐 (2404)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 7.32% | 殖 0%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/5536" target="_blank">聖暉* (5536)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.71% | 殖 2.18%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3402" target="_blank">漢科 (3402)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 4.56% | 殖 4.56%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6139" target="_blank">亞翔 (6139)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 9.31% | 殖 0%] 🔥 HOT</span>
-    </div>
-  </div>
-  <div class="sub-section-title">晶片與光學量測檢驗</div>
-  <div class="league-block">
-    <span class="league-title major-l">大聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker global-ticker" href="https://finance.yahoo.com/quote/TER" target="_blank">泰瑞達 (TER)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 7.1% | 殖 0.15%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2360" target="_blank">致茂 (2360)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 9.93% | 殖 0.94%] 🔥 HOT</span>
-    </div>
-  </div>
-  <div class="league-block">
-    <span class="league-title minor-l">小聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/6223" target="_blank">旺矽 (6223)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.06% | 殖 0%]</span>
-      <a class="ticker global-ticker" href="https://finance.yahoo.com/quote/COHU" target="_blank">Cohu (COHU)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 5.17% | 殖 0%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3030" target="_blank">德律 (3030)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 5.76% | 殖 2.02%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3563" target="_blank">牧德 (3563)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 9.66% | 殖 1.52%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6761" target="_blank">穩得 (6761)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.61% | 殖 3.31%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/8027" target="_blank">鈦昇 (8027)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 5.21% | 殖 0%] 🔥 HOT</span>
-    </div>
-  </div>
+<div class="sub-section-title">前端微縮與高階微影蝕刻</div>
+<div class="league-block">
+<span class="league-title major-l">大聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker global-ticker" href="https://finance.yahoo.com/quote/ASML" target="_blank">ASML (ASML)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$1550.13 | ▲ 6.21% | 殖 0.4%] 🔥 HOT</span>
+<a class="ticker global-ticker" href="https://finance.yahoo.com/quote/AMAT" target="_blank">應用材料 (AMAT)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$426.85 | ▲ 4.9% | 殖 0.47%]</span>
+</div>
+</div>
+<div class="league-block">
+<span class="league-title minor-l">小聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker global-ticker" href="https://finance.yahoo.com/quote/LRCX" target="_blank">科林研發 (LRCX)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$292.09 | ▲ 6.84% | 殖 0.37%] 🔥 HOT</span>
+<a class="ticker global-ticker" href="https://finance.yahoo.com/quote/8035.T" target="_blank">東京威力 (8035.T)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$48730.0 | ▲ 5.7% | 殖 1.36%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/3413" target="_blank">京鼎 (3413)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$325.0 | ▲ 3.5% | 殖 3.5%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3680" target="_blank">家登 (3680)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$540.0 | ▲ 6.72% | 殖 1.36%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/6667" target="_blank">信紘科 (6667)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$254.0 | ▲ 0.99% | 殖 4.75%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3551" target="_blank">世禾 (3551)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$197.5 | ▲ 2.33% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3176" target="_blank">商之器 (3176)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$39.8 | ▲ 6.85% | 殖 0%] 🔥 HOT</span>
+</div>
+</div>
+<div class="sub-section-title">先進封裝濕製程與廠務設備</div>
+<div class="league-block">
+<span class="league-title major-l">大聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/3131" target="_blank">弘塑 (3131)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$2690.0 | ▲ 4.26% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3583" target="_blank">辛耘 (3583)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$856.0 | ▲ 3.63% | 殖 0.73%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/6187" target="_blank">萬潤 (6187)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$1095.0 | ▲ 0.92% | 殖 1.09%]</span>
+</div>
+</div>
+<div class="league-block">
+<span class="league-title minor-l">小聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/5443" target="_blank">均豪 (5443)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$118.0 | ▲ 1.29% | 殖 1.89%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/2467" target="_blank">志聖 (2467)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$582.0 | ▲ 5.05% | 殖 0.99%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/2486" target="_blank">一詮 (2486)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$278.0 | ▲ 7.75% | 殖 0.19%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/6640" target="_blank">均華 (6640)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$1375.0 | ▲ 10.0% | 殖 1.2%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/3455" target="_blank">由田 (3455)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$308.0 | ▲ 8.45% | 殖 1.23%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/2727" target="_blank">鈦昇 (2727)</a><span class="quant-data" style="font-size: 11px; color: #2ecc71; margin-left: 4px; font-weight: bold;">[$234.0 | ▼ 0.21% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3055" target="_blank">蔚華科 (3055)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$117.5 | ▲ 4.91% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/6196" target="_blank">帆宣 (6196)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$429.5 | ▲ 6.31% | 殖 0%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/2404" target="_blank">漢唐 (2404)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$1105.0 | ▲ 7.8% | 殖 0%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/5536" target="_blank">聖暉* (5536)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$928.0 | ▲ 1.31% | 殖 2.18%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3402" target="_blank">漢科 (3402)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$137.5 | ▲ 4.56% | 殖 4.56%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/6139" target="_blank">亞翔 (6139)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$785.0 | ▲ 9.03% | 殖 0%] 🔥 HOT</span>
+</div>
+</div>
+<div class="sub-section-title">晶片與光學量測檢驗</div>
+<div class="league-block">
+<span class="league-title major-l">大聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker global-ticker" href="https://finance.yahoo.com/quote/TER" target="_blank">泰瑞達 (TER)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$344.34 | ▲ 7.1% | 殖 0.15%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/2360" target="_blank">致茂 (2360)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$2270.0 | ▲ 9.93% | 殖 0.94%] 🔥 HOT</span>
+</div>
+</div>
+<div class="league-block">
+<span class="league-title minor-l">小聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/6223" target="_blank">旺矽 (6223)</a><span class="quant-data" style="font-size: 11px; color: #2ecc71; margin-left: 4px; font-weight: bold;">[$5640.0 | ▼ 0.7% | 殖 0%]</span>
+<a class="ticker global-ticker" href="https://finance.yahoo.com/quote/COHU" target="_blank">Cohu (COHU)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$44.98 | ▲ 5.17% | 殖 0%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/3030" target="_blank">德律 (3030)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$381.5 | ▲ 9.94% | 殖 2.02%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/3563" target="_blank">牧德 (3563)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$933.0 | ▲ 9.89% | 殖 1.52%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/6761" target="_blank">穩得 (6761)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$196.5 | ▲ 8.26% | 殖 3.31%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/8027" target="_blank">鈦昇 (8027)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$244.0 | ▲ 1.67% | 殖 0%]</span>
+</div>
+</div>
 </td>
 <td class="strategy-col"><strong>算力製造的物理極限</strong>掌管 2 奈米以下埃米級晶圓製程，以及 CoWoS 先進封裝的開出產能。</td>
 </tr>
-
 <!-- 其餘族群 三～十二 維持相同結構，此處以原始資料帶入 -->
 <!-- ======== 第三群 ======== -->
 <tr>
 <td>三</td>
 <td><div class="group-name">半導體製程與<br/>先進封裝</div></td>
 <td>
-  <div class="sub-section-title">晶圓代工與特化晶圓</div>
-  <div class="league-block">
-    <span class="league-title major-l">大聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/2330" target="_blank">台積電 (2330)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.2% | 殖 1.1%]</span>
-    </div>
-  </div>
-  <div class="league-block">
-    <span class="league-title minor-l">小聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/2303" target="_blank">聯電 (2303)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 7.87% | 殖 2.41%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/5347" target="_blank">世界先進 (5347)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.57% | 殖 2.83%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6719" target="_blank">力積電 (6719)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 0.65% | 殖 1.98%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3707" target="_blank">漢磊 (3707)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 9.89% | 殖 0%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3532" target="_blank">台勝科 (3532)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 9.49% | 殖 0.49%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6488" target="_blank">環球晶 (6488)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 9.87% | 殖 1.21%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/5483" target="_blank">中美晶 (5483)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.3% | 殖 2.59%] 🔥 HOT</span>
-    </div>
-  </div>
-  <div class="sub-section-title">先進異質整合與專業封測 (OSAT)</div>
-  <div class="league-block">
-    <span class="league-title major-l">大聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/3711" target="_blank">日月光投控 (3711)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.51% | 殖 0%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/2449" target="_blank">京元電 (2449)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.6% | 殖 0.36%]</span>
-    </div>
-  </div>
-  <div class="league-block">
-    <span class="league-title minor-l">小聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/6239" target="_blank">力成 (6239)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 9.81% | 殖 1.92%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/8150" target="_blank">南茂 (8150)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 2.42% | 殖 1.65%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/8110" target="_blank">華東 (8110)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 1.95% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6257" target="_blank">矽格 (6257)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 4.83% | 殖 2.03%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3264" target="_blank">欣銓 (3264)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.05% | 殖 2.03%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6147" target="_blank">淇譽電 (6147)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.71% | 殖 1.3%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3289" target="_blank">宜特 (3289)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 4.05% | 殖 0%]</span>
-    </div>
-  </div>
-  <div class="sub-section-title">高階製程載具與精密探針卡</div>
-  <div class="league-block">
-    <span class="league-title major-l">大聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/6515" target="_blank">穎崴 (6515)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 4.41% | 殖 0%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6217" target="_blank">精測 (6217)</a><span class="quant-data" style="font-size: 11px; color: #2ecc71; margin-left: 4px; font-weight: bold;">[▼ 0.21% | 殖 0%]</span>
-    </div>
-  </div>
-  <div class="league-block">
-    <span class="league-title minor-l">小聯盟</span>
-    <div class="tickers-wrap">
-      <a class="ticker" href="https://statementdog.com/analysis/6683" target="_blank">雍智科技 (6683)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 3.37% | 殖 0.51%]</span>
-      <a class="ticker" href="https://statementdog.com/analysis/6271" target="_blank">同欣電 (6271)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 9.87% | 殖 1.6%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/3374" target="_blank">精材 (3374)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 6.28% | 殖 1.08%] 🔥 HOT</span>
-      <a class="ticker" href="https://statementdog.com/analysis/8086" target="_blank">宏捷科 (8086)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[▲ 2.77% | 殖 0%]</span>
-    </div>
-  </div>
+<div class="sub-section-title">晶圓代工與特化晶圓</div>
+<div class="league-block">
+<span class="league-title major-l">大聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/2330" target="_blank">台積電 (2330)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$2245.0 | ▲ 2.75% | 殖 1.1%]</span>
+</div>
+</div>
+<div class="league-block">
+<span class="league-title minor-l">小聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/2303" target="_blank">聯電 (2303)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$115.5 | ▲ 6.94% | 殖 2.41%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/5347" target="_blank">世界先進 (5347)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$163.0 | ▲ 2.52% | 殖 2.83%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/6719" target="_blank">力積電 (6719)</a><span class="quant-data" style="font-size: 11px; color: #2ecc71; margin-left: 4px; font-weight: bold;">[$231.0 | ▼ 0.43% | 殖 1.98%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3707" target="_blank">漢磊 (3707)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$80.0 | ▲ 9.89% | 殖 0%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/3532" target="_blank">台勝科 (3532)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$226.0 | ▲ 9.98% | 殖 0.49%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/6488" target="_blank">環球晶 (6488)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$701.0 | ▲ 9.87% | 殖 1.21%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/5483" target="_blank">中美晶 (5483)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$143.5 | ▲ 6.3% | 殖 2.59%] 🔥 HOT</span>
+</div>
+</div>
+<div class="sub-section-title">先進異質整合與專業封測 (OSAT)</div>
+<div class="league-block">
+<span class="league-title major-l">大聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/3711" target="_blank">日月光投控 (3711)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$510.0 | ▲ 7.14% | 殖 0%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/2449" target="_blank">京元電 (2449)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$288.0 | ▲ 3.78% | 殖 0.36%]</span>
+</div>
+</div>
+<div class="league-block">
+<span class="league-title minor-l">小聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/6239" target="_blank">力成 (6239)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$257.5 | ▲ 9.81% | 殖 1.92%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/8150" target="_blank">南茂 (8150)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$76.3 | ▲ 2.55% | 殖 1.65%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/8110" target="_blank">華東 (8110)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$47.0 | ▲ 1.62% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/6257" target="_blank">矽格 (6257)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$218.5 | ▲ 5.56% | 殖 2.03%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/3264" target="_blank">欣銓 (3264)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$220.0 | ▲ 6.54% | 殖 2.03%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/6147" target="_blank">淇譽電 (6147)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$222.5 | ▲ 3.25% | 殖 1.3%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/3289" target="_blank">宜特 (3289)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$164.0 | ▲ 2.18% | 殖 0%]</span>
+</div>
+</div>
+<div class="sub-section-title">高階製程載具與精密探針卡</div>
+<div class="league-block">
+<span class="league-title major-l">大聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/6515" target="_blank">穎崴 (6515)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$9510.0 | ▲ 4.74% | 殖 0%]</span>
+<a class="ticker" href="https://statementdog.com/analysis/6217" target="_blank">精測 (6217)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$249.5 | ▲ 4.39% | 殖 0%]</span>
+</div>
+</div>
+<div class="league-block">
+<span class="league-title minor-l">小聯盟</span>
+<div class="tickers-wrap">
+<a class="ticker" href="https://statementdog.com/analysis/6683" target="_blank">雍智科技 (6683)</a><span class="quant-data" style="font-size: 11px; color: #2ecc71; margin-left: 4px; font-weight: bold;">[$1670.0 | ▼ 6.18% | 殖 0.51%] ⚠️ RISK</span>
+<a class="ticker" href="https://statementdog.com/analysis/6271" target="_blank">同欣電 (6271)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$206.0 | ▲ 9.87% | 殖 1.6%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/3374" target="_blank">精材 (3374)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$245.0 | ▲ 6.06% | 殖 1.08%] 🔥 HOT</span>
+<a class="ticker" href="https://statementdog.com/analysis/8086" target="_blank">宏捷科 (8086)</a><span class="quant-data" style="font-size: 11px; color: #e74c3c; margin-left: 4px; font-weight: bold;">[$149.0 | ▲ 3.11% | 殖 0%]</span>
+</div>
+</div>
 </td>
 <td class="strategy-col"><strong>算力核心的物理載體</strong>突破矽晶圓摩爾定律的物理天花板，透過微縮製程與晶片異質堆疊空間革命。</td>
 </tr>
-
 </tbody>
 </table>
 </div>
-
 <!-- 置頂按鈕 -->
-<button id="back-to-top" title="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到頂部">↑</button>
 <!-- ============================================================
      互動 JS：搜尋篩選 + 置頂按鈕
      ============================================================ -->
@@ -840,6 +815,5 @@ window.addEventListener('scroll', () => {
   topBtn.classList.toggle('visible', window.scrollY > 300);
 });
 </script>
-
 </body>
 </html>
