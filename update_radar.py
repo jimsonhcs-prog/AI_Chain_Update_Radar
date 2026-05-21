@@ -40,21 +40,29 @@ def get_quant_data(ticker_symbol):
 
 def generate_span_tag(pct_change, yield_pct):
     """
-    根據漲跌幅與殖利率生成帶有熱力色塊的 HTML 標籤。
+    依據漲跌幅強度生成「決策標籤」注入 HTML。
     """
     if pct_change is None:
         return ""
         
-    # 動能熱力顏色邏輯 (漲 > 0 為紅色，跌 < 0 為綠色)
+    # 定義訊號強度標籤
+    signal_label = ""
+    if pct_change >= 5.0:
+        signal_label = "🔥 HOT"
+    elif pct_change <= -3.0:
+        signal_label = "⚠️ RISK"
+    
+    # 動能熱力顏色邏輯
     color = "#e74c3c" if pct_change > 0 else "#2ecc71" if pct_change < 0 else "#7f8c8d"
     sign = "▲" if pct_change > 0 else "▼" if pct_change < 0 else "-"
     
+    # 加入 signal_label 的 HTML 注入
     return (
         f"<span class='quant-data' style='font-size: 11px; color: {color}; margin-left: 4px; font-weight: bold;'>"
-        f"[{sign} {abs(pct_change)}% | 殖 {yield_pct}%]"
+        f"[{sign} {abs(pct_change)}% | 殖 {yield_pct}%] {signal_label}"
         f"</span>"
     )
-
+	
 def main():
     print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] 開始更新 AI 量化總表...")
     
