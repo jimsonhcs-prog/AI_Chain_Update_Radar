@@ -10,8 +10,13 @@ jobs:
   update-radar-data:
     runs-on: ubuntu-latest
     
+    # 【新增】強制設定使用 Node.js 24 以符合 GitHub 最新的執行標準
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    
     permissions:
       contents: write
+    # ... 以下保持不變
 
     steps:
       - name: Checkout Repository
