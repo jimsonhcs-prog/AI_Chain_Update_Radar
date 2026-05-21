@@ -64,6 +64,13 @@ def main():
     a_tags = soup.find_all('a', class_=lambda c: c and 'ticker' in c.split())
     print(f"共找到 {len(a_tags)} 檔個股標籤，準備進行資料抓取與注入...")
     
+    # --- 新增：Hero 統計數據計數器 ---
+    total_count = len(a_tags)
+    up_count = 0
+    down_count = 0
+    strong_count = 0
+    # -------------------------------
+
     for idx, a_tag in enumerate(a_tags, 1):
         href = a_tag.get('href', '')
         
@@ -86,6 +93,15 @@ def main():
             pct, yld = get_quant_data(code)
             
         if pct is not None:
+            # --- 新增：更新計數器 ---
+            if pct > 0:
+                up_count += 1
+                if pct >= 5.0:  # 漲幅大於 5% 視為強勢動能
+                    strong_count += 1
+            elif pct < 0:
+                down_count += 1
+            # ------------------------
+
             new_span_soup = BeautifulSoup(generate_span_tag(pct, yld), 'html.parser').span
             next_sibling = a_tag.find_next_sibling()
             
@@ -100,6 +116,28 @@ def main():
             
         time.sleep(0.5)
         
+    # ==========================================
+    # 新增：動態注入 Hero 數據儀表板 (Rule 4)
+    # ==========================================
+    hero_html = f"""
+    <div class="hero-stats" style="display: flex; gap: 16px; margin-top: 16px; margin-bottom: 16px; font-size: 14px; font-weight: 600; flex-wrap: wrap;">
+        <span style="background: #334155; padding: 6px 12px; border-radius: 6px; color: #f8fafc; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">📡 監測雷達: {total_count} 檔</span>
+        <span style="background: #fee2e2; padding: 6px 12px; border-radius: 6px; color: #991b1b; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">🔥 今日上漲: {up_count} 家 (強勢 >5%: {strong_count} 家)</span>
+        <span style="background: #dcfce7; padding: 6px 12px; border-radius: 6px; color: #166534; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">🧊 今日下跌: {down_count} 家</span>
+        <span style="background: #f1f5f9; padding: 6px 12px; border-radius: 6px; color: #475569; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">⏱ 更新時間: {time.strftime('%Y-%m-%d %H:%M')}</span>
+    </div>
+    """
+    hero_soup = BeautifulSoup(hero_html, 'html.parser')
+    existing_hero = soup.find('div', class_='hero-stats')
+    
+    # 尋找插入點 (替換舊的或插入標題後方)
+    if existing_hero:
+        existing_hero.replace_with(hero_soup)
+    else:
+        title_div = soup.find('div', class_='dashboard-title')
+        if title_div:
+            title_div.insert_after(hero_soup)
+
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as file:
         file.write(str(soup))
         
