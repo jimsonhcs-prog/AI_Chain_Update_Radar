@@ -1,6 +1,8 @@
 import os
 import time
 import math
+import json
+import re
 import concurrent.futures
 import yfinance as yf
 from bs4 import BeautifulSoup
@@ -10,83 +12,158 @@ from bs4 import BeautifulSoup
 # ==========================================
 HTML_FILE = "AI大聯盟II.html"
 OUTPUT_FILE = "AI大聯盟II.html"
-MAX_WORKERS = 30  # 並行線程數，30 個 Thread 能在 10-15 秒內完成 235 檔個股抓取
+CACHE_FILE = "ticker_cache.json"
+MARKET_TXT = "台股清單.txt"
 
 
-def get_quant_data(ticker_symbol):
+def load_market_map(txt_path=MARKET_TXT):
     """
-    抓取單一股票的當日漲跌幅、近 12 個月殖利率與當前股價。
-    回傳: (pct_change, yield_pct, price) 或 (None, None, None)
+    解析台股清單.txt，建立台股代碼到上市/上櫃 (.TW/.TWO) 的精確對照字典。
+    """
+    market_map = {}
+    if not os.path.exists(txt_path):
+        print(f"[WARNING] 找不到台股清單檔案: {txt_path}，將預設為上市 (.TW)")
+        return market_map
+
+    pattern = re.compile(r"'\s*(\d{4,})\s*'\s*:\s*'.*?'\s*,\s*#\s*\[(上市|上櫃)\]")
+    try:
+        with open(txt_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        matches = pattern.findall(content)
+        for code, market in matches:
+            market_map[code] = f"{code}.TW" if market == "上市" else f"{code}.TWO"
+        print(f"成功解析 {len(market_map)} 檔台股上市櫃對照表。")
+    except Exception as e:
+        print(f"[WARNING] 解析台股清單時出錯: {e}")
+    return market_map
+
+
+def parse_html_for_dividends(soup, market_map, cache_path=CACHE_FILE):
+    """
+    從現有的 HTML 網頁中解析 quant-data 標籤，提取已有的殖利率與股價，
+    並計算出每股配息金額 (dividend_rate) 寫入本地快取。
+    """
+    cache = {}
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                cache = json.load(f)
+        except Exception:
+            pass
+
+    a_tags = soup.find_all('a', class_=lambda c: c and 'ticker' in c.split())
+    span_pattern = re.compile(r"\[\$?([\d\.]+)\s*\|\s*([▲▼\-]?\s*[\d\.]+)%\s*\|\s*殖\s*([\d\.]+)%\]")
+    
+    updated_cache = False
+    for tag in a_tags:
+        href = tag.get('href', '')
+        resolved_ticker = None
+        
+        if 'statementdog.com/analysis/' in href:
+            code = href.rstrip('/').split('/')[-1]
+            resolved_ticker = market_map.get(code, f"{code}.TW")
+        elif 'finance.yahoo.com/quote/' in href:
+            resolved_ticker = href.rstrip('/').split('/')[-1]
+
+        if not resolved_ticker:
+            continue
+
+        # 若 cache 中此 ticker 的格式不是 dict，則將其重置
+        ticker_entry = cache.get(resolved_ticker)
+        if not isinstance(ticker_entry, dict):
+            ticker_entry = {}
+            cache[resolved_ticker] = ticker_entry
+
+        # 若 cache 中還沒有此 ticker 的股息資訊，則從 HTML 解析
+        if ticker_entry.get('dividend_rate') is None:
+            span = tag.find_next_sibling('span', class_='quant-data')
+            if span:
+                match = span_pattern.search(span.text)
+                if match:
+                    try:
+                        price = float(match.group(1))
+                        yield_pct = float(match.group(3))
+                        # 股息 = 股價 * 殖利率 / 100
+                        div_rate = round((price * yield_pct / 100.0), 4)
+                        cache[resolved_ticker] = {
+                            "dividend_rate": div_rate,
+                            "last_price": price,
+                            "yield_pct": yield_pct
+                        }
+                        updated_cache = True
+                    except Exception:
+                        pass
+
+    if updated_cache:
+        try:
+            with open(cache_path, 'w', encoding='utf-8') as f:
+                json.dump(cache, f, ensure_ascii=False, indent=2)
+            print(f"已從 HTML 提取股息資訊並儲存至 {cache_path}。")
+        except Exception as e:
+            print(f"[WARNING] 寫入快取檔案失敗: {e}")
+            
+    return cache
+
+
+def get_new_ticker_dividend(ticker, cache, cache_path=CACHE_FILE):
+    """
+    針對全新加入且無快取的個股，發送一次線上 Ticker.info 請求獲取股息，並寫入快取中。
+    為了避免被封鎖，每次請求後會延遲 1 秒。
+    """
+    ticker_entry = cache.get(ticker)
+    if isinstance(ticker_entry, dict) and ticker_entry.get('dividend_rate') is not None:
+        return ticker_entry['dividend_rate']
+
+    try:
+        print(f"-> 線上獲取新個股 {ticker} 股息資訊中...")
+        stock = yf.Ticker(ticker)
+        info = stock.info
+        yield_val = info.get('trailingAnnualDividendYield', 0.0)
+        if not yield_val:
+            yield_val = info.get('dividendYield', 0.0)
+            
+        price = info.get('previousClose') or info.get('regularMarketPreviousClose') or 1.0
+        div_rate = round(yield_val * price, 4) if yield_val else 0.0
+        
+        cache[ticker] = {
+            "dividend_rate": div_rate,
+            "last_price": price,
+            "yield_pct": round(yield_val * 100, 2)
+        }
+        with open(cache_path, 'w', encoding='utf-8') as f:
+            json.dump(cache, f, ensure_ascii=False, indent=2)
+            
+        time.sleep(1.0)  # 安全間隔
+        return div_rate
+    except Exception as e:
+        print(f"[WARNING] 線上獲取 {ticker} 股息失敗 (設為 0.0): {e}")
+        return 0.0
+
+
+def download_single_ticker_fallback(ticker):
+    """
+    當 yf.download 批次下載失敗或缺失時的安全單一補抓回退函數。
     """
     try:
-        stock = yf.Ticker(ticker_symbol)
+        stock = yf.Ticker(ticker)
         hist = stock.history(period="2d")
-
-        if len(hist) < 2:
-            # 有可能只有 1 筆數據（例如剛開盤或剛上市），此時試圖取最後一筆
-            if len(hist) == 1:
-                curr_price = hist['Close'].iloc[0]
-                if not math.isnan(curr_price):
-                    info = stock.info
-                    yield_val = info.get('trailingAnnualDividendYield', 0)
-                    yield_pct = (yield_val * 100) if yield_val else 0.0
-                    return 0.0, round(yield_pct, 2), round(curr_price, 2)
-            return None, None, None
-
-        prev_close = hist['Close'].iloc[-2]
-        curr_price = hist['Close'].iloc[-1]
-
-        if math.isnan(prev_close) or prev_close == 0 or math.isnan(curr_price):
-            return None, None, None
-
-        pct_change = ((curr_price - prev_close) / prev_close) * 100
-
-        try:
-            info = stock.info
-            yield_val = info.get('trailingAnnualDividendYield', 0)
-            yield_pct = (yield_val * 100) if yield_val else 0.0
-        except Exception:
-            yield_pct = 0.0
-
-        return round(pct_change, 2), round(yield_pct, 2), round(curr_price, 2)
-
+        if len(hist) >= 2:
+            prev_close = hist['Close'].iloc[-2]
+            curr_price = hist['Close'].iloc[-1]
+            return ticker, prev_close, curr_price
+        elif len(hist) == 1:
+            curr_price = hist['Close'].iloc[0]
+            return ticker, curr_price, curr_price
     except Exception:
-        return None, None, None
+        pass
+    return ticker, None, None
 
 
-def process_single_tag(a_tag):
-    """
-    處理單一 <a> 標籤，進行數據抓取與解析。
-    回傳: (a_tag, pct, yld, price)
-    """
-    href = a_tag.get('href', '')
-    pct, yld, price = None, None, None
-    resolved_ticker = None
-
-    if 'statementdog.com/analysis/' in href:
-        code = href.rstrip('/').split('/')[-1]
-        resolved_ticker = f"{code}.TW"
-        # 1. 先嘗試上市 (.TW)
-        pct, yld, price = get_quant_data(resolved_ticker)
-
-        # 2. Fallback：自動嘗試上櫃 (.TWO)
-        if pct is None:
-            resolved_ticker = f"{code}.TWO"
-            pct, yld, price = get_quant_data(resolved_ticker)
-
-    elif 'finance.yahoo.com/quote/' in href:
-        code = href.rstrip('/').split('/')[-1]
-        resolved_ticker = code
-        pct, yld, price = get_quant_data(resolved_ticker)
-
-    return a_tag, pct, yld, price
-
-
-def generate_span_tag(pct_change, yield_pct, price):
+def generate_span_tag(price, pct_change, yield_pct):
     """
     依據漲跌幅強度生成「決策標籤」注入 HTML。
     """
-    if pct_change is None:
+    if pct_change is None or price is None:
         return ""
 
     # 訊號強度標籤
@@ -100,12 +177,10 @@ def generate_span_tag(pct_change, yield_pct, price):
     color = "#e74c3c" if pct_change > 0 else "#2ecc71" if pct_change < 0 else "#7f8c8d"
     sign = "▲" if pct_change > 0 else "▼" if pct_change < 0 else "-"
 
-    price_str = f"${price} | " if price is not None else ""
-
     return (
         f"<span class='quant-data' style='font-size: 11px; color: {color}; "
         f"margin-left: 4px; font-weight: bold;'>"
-        f"[{price_str}{sign} {abs(pct_change)}% | 殖 {yield_pct}%]{signal_label}"
+        f"[${price} | {sign} {abs(pct_change)}% | 殖 {yield_pct}%]{signal_label}"
         f"</span>"
     )
 
@@ -121,56 +196,129 @@ def main():
     with open(HTML_FILE, 'r', encoding='utf-8') as file:
         soup = BeautifulSoup(file.read(), 'html.parser')
 
-    a_tags = soup.find_all('a', class_=lambda c: c and 'ticker' in c.split())
-    total_count = len(a_tags)
-    print(f"共找到 {total_count} 檔個股標籤，準備並行下載數據...")
+    # 1. 載入台股清單對照字典
+    market_map = load_market_map(MARKET_TXT)
 
+    # 2. 從 HTML 解析已有股息資訊並建立快取
+    dividend_cache = parse_html_for_dividends(soup, market_map, CACHE_FILE)
+
+    # 3. 收集所有 Ticker，並建立 Ticker 與 a 標籤的映射
+    a_tags = soup.find_all('a', class_=lambda c: c and 'ticker' in c.split())
+    ticker_to_tags = {}
+    all_tickers = set()
+
+    for tag in a_tags:
+        href = tag.get('href', '')
+        resolved_ticker = None
+        if 'statementdog.com/analysis/' in href:
+            code = href.rstrip('/').split('/')[-1]
+            resolved_ticker = market_map.get(code, f"{code}.TW")
+        elif 'finance.yahoo.com/quote/' in href:
+            resolved_ticker = href.rstrip('/').split('/')[-1]
+
+        if resolved_ticker:
+            all_tickers.add(resolved_ticker)
+            if resolved_ticker not in ticker_to_tags:
+                ticker_to_tags[resolved_ticker] = []
+            ticker_to_tags[resolved_ticker].append(tag)
+
+    all_tickers_list = list(all_tickers)
+    print(f"共解析出 {len(all_tickers_list)} 檔不重複個股標籤。")
+
+    # 4. 批次下載價格數據 (單一請求)
+    print("正在透過單一批次請求下載所有價格數據...")
+    price_data = {}
+    try:
+        # 使用 group_by='ticker' 來一次下載所有 Tickers
+        batch_df = yf.download(all_tickers_list, period="2d", group_by='ticker', progress=False)
+        
+        # 提取資料
+        for ticker in all_tickers_list:
+            try:
+                # 判斷是單一 Ticker 還是 MultiIndex DataFrame
+                if len(all_tickers_list) == 1:
+                    df = batch_df
+                else:
+                    df = batch_df[ticker]
+                
+                df = df.dropna(subset=['Close'])
+                if len(df) >= 2:
+                    prev_close = df['Close'].iloc[-2]
+                    curr_price = df['Close'].iloc[-1]
+                    price_data[ticker] = (prev_close, curr_price)
+                elif len(df) == 1:
+                    curr_price = df['Close'].iloc[0]
+                    price_data[ticker] = (curr_price, curr_price)
+            except Exception:
+                pass
+    except Exception as e:
+        print(f"[WARNING] 批次下載出錯，將啟動 Fallback 回退機制: {e}")
+
+    # 5. 針對下載失敗或缺失的個股，啟動 Fallback 單一補抓重試
+    missing_tickers = [t for t in all_tickers_list if t not in price_data]
+    if missing_tickers:
+        print(f"共有 {len(missing_tickers)} 檔個股價格缺失，啟動低頻率安全回退重試...")
+        # 限制 concurrent 數為 3，並且帶有 delay，絕對不觸發 Rate Limit
+        with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+            futures = {executor.submit(download_single_ticker_fallback, t): t for t in missing_tickers}
+            for future in concurrent.futures.as_completed(futures):
+                ticker = futures[future]
+                try:
+                    t, prev_close, curr_price = future.result()
+                    if curr_price is not None:
+                        price_data[t] = (prev_close, curr_price)
+                        print(f"  [RETRY SUCCESS] {t}")
+                    else:
+                        print(f"  [RETRY FAILED] {t}")
+                except Exception as e:
+                    print(f"  [RETRY ERROR] {ticker}: {e}")
+                time.sleep(0.5)  # 每次補抓間隔 0.5 秒
+
+    # 6. 計算與更新 HTML 標籤
     up_count = 0
     down_count = 0
     strong_count = 0
     success_count = 0
 
-    # 使用 ThreadPoolExecutor 並行下載所有標籤數據
-    results = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = {executor.submit(process_single_tag, tag): tag for tag in a_tags}
-        for future in concurrent.futures.as_completed(futures):
-            tag = futures[future]
-            try:
-                a_tag, pct, yld, price = future.result()
-                results.append((a_tag, pct, yld, price))
-                if pct is not None:
-                    success_count += 1
-                    ticker_text = a_tag.text.strip()
-                    print(f"成功 [{ticker_text}] 漲幅:{pct:+.2f}% 殖:{yld:.2f}% 價:{price}")
-                else:
-                    print(f"失敗 [{a_tag.text.strip()}] (代碼錯誤或無數據)")
-            except Exception as e:
-                print(f"[ERROR] 處理標籤 {tag.text.strip()} 時出錯: {e}")
+    for ticker, (prev_close, curr_price) in price_data.items():
+        if curr_price is None or math.isnan(curr_price):
+            continue
 
-    # 將結果寫回 BeautifulSoup
-    for a_tag, pct, yld, price in results:
-        if pct is not None:
-            if pct > 0:
-                up_count += 1
-                if pct >= 5.0:
-                    strong_count += 1
-            elif pct < 0:
-                down_count += 1
+        # 計算漲跌幅
+        if prev_close is not None and not math.isnan(prev_close) and prev_close != 0:
+            pct_change = round(((curr_price - prev_close) / prev_close) * 100, 2)
+        else:
+            pct_change = 0.0
 
-            new_span_html = generate_span_tag(pct, yld, price)
+        # 獲取或更新該個股股利資訊 (Lazy-load 快取)
+        div_rate = get_new_ticker_dividend(ticker, dividend_cache, CACHE_FILE)
+        
+        # 計算殖利率 = 股利 / 最新股價 * 100
+        yield_pct = round((div_rate / curr_price) * 100, 2) if div_rate else 0.0
+
+        success_count += 1
+        if pct_change > 0:
+            up_count += 1
+            if pct_change >= 5.0:
+                strong_count += 1
+        elif pct_change < 0:
+            down_count += 1
+
+        # 產生並注入新 span
+        price_val = round(curr_price, 2)
+        new_span_html = generate_span_tag(price_val, pct_change, yield_pct)
+
+        for tag in ticker_to_tags[ticker]:
             new_span_soup = BeautifulSoup(new_span_html, 'html.parser').span
+            if new_span_soup:
+                next_sibling = tag.find_next_sibling()
+                if next_sibling and next_sibling.name == 'span' and \
+                   'quant-data' in next_sibling.get('class', []):
+                    next_sibling.replace_with(new_span_soup)
+                else:
+                    tag.insert_after(new_span_soup)
 
-            next_sibling = a_tag.find_next_sibling()
-            if next_sibling and next_sibling.name == 'span' and \
-               'quant-data' in next_sibling.get('class', []):
-                next_sibling.replace_with(new_span_soup)
-            else:
-                a_tag.insert_after(new_span_soup)
-
-    # ==========================================
-    # 動態注入 Hero 數據儀表板
-    # ==========================================
+    # 7. 更新 Hero 數據面板
     neutral_count = success_count - up_count - down_count
     hero_html = f"""
   <div class="hero-stats">
@@ -207,17 +355,17 @@ def main():
         if title_div:
             title_div.insert_after(hero_soup)
 
+    # 8. 寫回檔案
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as file:
         file.write(str(soup))
 
     elapsed_time = round(time.time() - start_time, 2)
-    # 避免 Windows cp950 編碼問題，不使用 '≥' 字符
     print(f"\n{'='*50}")
     print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] 更新完畢！總耗時: {elapsed_time} 秒")
-    print(f"  總監測: {total_count} 檔 | 成功: {success_count} | 失敗: {total_count - success_count}")
+    print(f"  總個股: {len(all_tickers_list)} 檔 | 成功: {success_count} | 失敗: {len(all_tickers_list) - success_count}")
     print(f"  今日上漲: {up_count} | 今日下跌: {down_count} | 平盤: {neutral_count}")
     print(f"  強勢 (>=5%): {strong_count} 檔")
-    print(f"  已覆寫至 {OUTPUT_FILE}")
+    print(f"  數據已成功更新並寫入 {OUTPUT_FILE}")
 
 
 if __name__ == "__main__":
