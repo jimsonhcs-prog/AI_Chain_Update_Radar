@@ -10,8 +10,8 @@ from bs4 import BeautifulSoup
 # ==========================================
 # 參數與設定
 # ==========================================
-HTML_FILE = "AI大聯盟II.html"
-OUTPUT_FILE = "AI大聯盟II.html"
+HTML_FILE = "index.html"
+OUTPUT_FILE = "index.html"
 CACHE_FILE = "ticker_cache.json"
 MARKET_TXT = "台股清單.txt"
 
