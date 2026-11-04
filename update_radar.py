@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 # ==========================================
 # 參數與設定
-# ==========================================
+# =========================================
 HTML_FILE = "index.html"
 OUTPUT_FILE = "index.html"
 CACHE_FILE = "ticker_cache.json"
